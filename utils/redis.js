@@ -22,9 +22,10 @@ class RedisClient {
     return new Promise((resolve, reject) => {
       this.client.get(key, (err, result) => {
         if (err) {
-          return reject(err);
+          reject(err);
+        } else {
+          resolve(result);
         }
-        resolve(result);
       });
     });
   }
@@ -34,9 +35,10 @@ class RedisClient {
     return new Promise((resolve, reject) => {
       this.client.setex(key, duration, value, (err) => {
         if (err) {
-          return reject(err);
+          reject(err);
+        } else {
+          resolve(true);
         }
-        resolve(true);
       });
     });
   }
@@ -46,9 +48,10 @@ class RedisClient {
     return new Promise((resolve, reject) => {
       this.client.del(key, (err) => {
         if (err) {
-          return reject(err);
+          reject(err);
+        } else {
+          resolve(true);
         }
-        resolve(true);
       });
     });
   }
