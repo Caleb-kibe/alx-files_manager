@@ -1,7 +1,6 @@
 // Import redis library
 const redis = require('redis');
 
-
 // Defines RedisClient class
 class RedisClient {
   constructor() {
@@ -23,20 +22,20 @@ class RedisClient {
     return new Promise((resolve, reject) => {
       this.client.get(key, (err, result) => {
         if (err) {
-	  return reject(err);
-	}
+          return reject(err);
+        }
         resolve(result);
       });
     });
   }
-  
+
   // set value in redis with expiration
   async set(key, value, duration) {
     return new Promise((resolve, reject) => {
       this.client.setex(key, duration, value, (err) => {
         if (err) {
-	  return reject(err);
-	}
+          return reject(err);
+        }
         resolve(true);
       });
     });
@@ -44,11 +43,11 @@ class RedisClient {
 
   // delete the value from redis
   async del(key) {
-    return new Promise((resolve, rejet) => {
+    return new Promise((resolve, reject) => {
       this.client.del(key, (err) => {
-       if (err) {
-         return reject(err);
-       }
+        if (err) {
+          return reject(err);
+        }
         resolve(true);
       });
     });
